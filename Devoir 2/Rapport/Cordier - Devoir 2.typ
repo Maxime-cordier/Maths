@@ -98,7 +98,7 @@ La figure 3 ci-dessous regroupe des représentations graphiques de la moyenne em
   ),
   caption: [Moyenne empirique pour N variables aléatoires.],
 )
-Il semblerai que la limite vers l'infini de la moyenne soit égale à 0.
+Ces variables aléatoire sont générées avec la fonction randn de la bibliothèque random. Ces variables suivent alors une loi normale centrée réduite N(0,1).
 
 Pour chaque N, nous avons également calculer l'espérance et l'écart type : 
 #figure(
