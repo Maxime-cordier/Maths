@@ -1,0 +1,51 @@
+Exo 2:
+Partie 1 :
+
+//1
+
+Dans le contexte de la marche aléatoire décrite précédemment, où un jet de pièce équilibrée détermine le déplacement à droite (+s) ou à gauche (-s), la variable aléatoire X_i peut être modélisée comme une variable aléatoire suivant la loi de Rademacher.
+
+La loi de Rademacher est définie par la distribution de probabilité suivante :
+
+P(X_i = +1) = 0,5
+P(X_i = -1) = 0,5
+
+Dans cette formulation, la valeur +1 représente un déplacement vers la droite (face), et la valeur -1 représente un déplacement vers la gauche (pile).
+
+Ainsi, la loi de la variable aléatoire X_i dans ce cas est la loi de Rademacher.
+
+//2
+
+Lorsque nous additionnons un grand nombre de variables aléatoires indépendantes et identiquement distribuées, telles que les X_i dans ce cas, selon le théorème central limite, la somme converge vers une distribution normale.
+
+Dans ce cas, chaque X_i suit une loi de Rademacher avec une probabilité de +1 et -1, chacune étant de 0,5. La somme des variables aléatoires X_i donne la position du marcheur à l'instant nT.
+
+Comme n tend vers l'infini, la distribution de X converge vers une distribution normale. La loi de X suit une distribution normale avec une moyenne de 0 et une variance de n.
+
+En résumé, la variable aléatoire X(nT, w), représentant la position du marcheur à l'instant nT, suit une loi normale avec une moyenne de 0 et une variance de n.
+
+//3
+
+test.py
+
+//4
+
+Pour calculer l'espérance de la variable aléatoire X, qui représente la position du marcheur à l'instant nT, nous devons tenir compte de la distribution de probabilité de X.
+
+Dans le cas de la marche aléatoire avec des déplacements de +s et -s équiprobables, la variable aléatoire X_i suit une loi de Rademacher, où chaque valeur a une probabilité de 0,5. Ainsi, nous pouvons considérer X comme la somme de n variables aléatoires indépendantes et identiquement distribuées, chacune suivant une loi de Rademacher.
+
+L'espérance mathématique d'une variable aléatoire est la moyenne pondérée des valeurs possibles, où les poids sont les probabilités associées à ces valeurs. Dans le cas de la loi de Rademacher, l'espérance de chaque X_i est de 0, car les valeurs +1 et -1 sont équiprobables.
+
+Puisque X est la somme de n variables aléatoires indépendantes X_i, et que l'espérance de chaque X_i est de 0, l'espérance de X est la somme des espérances de chaque X_i :
+
+E(X) = E(X_1 + X_2 + ... + X_n) = E(X_1) + E(X_2) + ... + E(X_n) = 0 + 0 + ... + 0 = 0
+
+Ainsi, l'espérance de la variable aléatoire X, représentant la position du marcheur à l'instant nT, est de 0. Cela signifie que, en moyenne, le marcheur ne se déplace ni à droite ni à gauche, restant à sa position initiale.
+
+Dans notre cas, chaque X_i suit une loi de Rademacher avec une variance de σ^2, où σ^2 est l'écart-type. Puisque les déplacements à gauche et à droite ont la même probabilité de 0,5, nous avons σ^2 = (1^2 + (-1)^2) / 2 = 1.
+
+Ainsi, la variance de chaque X_i est égale à 1, et par conséquent, la variance de X est n fois la variance d'une seule variable X_i :
+
+Var(X) = n * Var(X_i) = n * 1 = n
+
+Par conséquent, la variance de la variable aléatoire X, représentant la position du marcheur à l'instant nT, est nσ^2, où σ^2 est la variance d'une seule variable X_i et n est le nombre d'intervalles de temps.

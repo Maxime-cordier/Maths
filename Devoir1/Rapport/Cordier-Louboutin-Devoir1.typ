@@ -3,6 +3,7 @@
   titre: [ Devoir maison 1 "Chiffrement RSA" ],
   auteurs: (
     (nom: "Maxime Cordier", email:"mcordier@enssat.fr"),
+    (nom: "Malo Louboutin", email:"mloubout@enssat.fr")
   ),
   annee: 2023,
   promotion: "FISA IAI 2",
