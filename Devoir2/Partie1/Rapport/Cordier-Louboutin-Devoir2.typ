@@ -27,6 +27,13 @@ Nous avons choisi de générer des nombres aléatoires pour une loi discrète un
   caption: [Génération de N nombres aléatoires suivant une loi uniforme, pour plusieurs valeurs de N.],
 )
 
+On réalise maintenant le test du $chi#super[2]$ pour la loi uniforme. Pour cela, on prend en compte les nombres $X#sub[i]$ générés via notre fonction génératrice congruencielle linéaire et les nombres $Y#sub[i]$ générés à l'aide de la bibliothèque random de python. La distance entre ces deux méthodes de générations se mesure par la variable aléatoire D². On a :
+
+D² = $sum_(i=1)^k frac((X#sub[i]-Y#sub[i])^2,Y#sub[i])$
+
+On compare ensuite cette valeur à la valeur critique de la loi du $chi#super[2]$ à N-1 degrés de liberté. 
+
+Exemple : Pour 10 nombres on s'interresse à la valeur critique de la loi du $chi#super[2]$ à un degre de 9. Si D² est inférieur à cette valeur critique, alors on accepte l'hypothèse que les 10 nombres générés suivent une loi uniforme. Sinon, on rejette cette hypothèse. 
 
 Ensuite, la figure 2 ci-dessous regroupe des représentations graphiques de généréation de nombre aléatoire pour la loi continue exponentielle. Ces nombres ont été créés à l'aide d'une fonction génératrice congruencielle linéaire et de la fonction inverse de la fonction de répartition de la loi exponentielle ayant pour paramètre $lambda$.
 
@@ -46,6 +53,10 @@ Pour la génération des nombres aléatoires suivant une loi exponentielle, nous
   ),
   caption: [Génération de N nombres aléatoires suivant une loi exponentielle, pour plusieurs valeurs de N.],
 )
+
+Nous réalisons également un test du $chi#super[2]$ pour la loi exponentielle. Il s'agit de la même méthode que pour la loi uniforme.
+
+Pour conclure, nous avons remarqué que les nombres générés à l'aide du générateur congruenciel linéaire suivent restent constamment les mêmes. Exécuter une nouvelle fois le code ne change rien. Cela est du au fait que le générateur congruenciel linéaire génère certes, des nombres aléatoire, mais toujours avec le même calcul et les mêmes paramètres. Les nombres générés sont donc tout le temps les mêmes. Ce n'est pas le cas avec les fonctions de la bibliothèque random. En effet, ces fonctions utilisent des paramètres différents à chaque exécution. Les nombres générés sont donc différents à chaque exécution.
 
 == Partie 2
 
@@ -88,7 +99,7 @@ La figure 3 ci-dessous regroupe des représentations graphiques de la moyenne em
   ),
   caption: [Moyenne empirique pour N variables aléatoires.],
 )
-Il semblerai que la limite vers l'infini de la moyenne soit égale à 0.
+Ces variables aléatoire sont générées avec la fonction randn de la bibliothèque random. Ces variables suivent alors une loi normale centrée réduite N(0,1).
 
 Pour chaque N, nous avons également calculer l'espérance et l'écart type : 
 #figure(
