@@ -115,5 +115,233 @@ Nous pouvons remarquer que l'écart type tand vers 1. L'espérance tand par cont
 = Marche aléatoire
 == Partie 1
 
+Dans le contexte d'une marche aléatoire où un jet de pièce équilibrée détermine le déplacement à droite (+s) ou à gauche (-s), la variable aléatoire $X_i$ peut être modélisée comme une variable aléatoire suivant la loi de Rademacher.
+
+La loi de Rademacher est définie par la distribution de probabilité suivante :
+
+$P(X_i = +1) = frac(1,2)$
+
+$P(X_i = -1) = frac(1,2)$
+
+Dans cette formulation, la valeur +1 représente un déplacement vers la droite (face), et la valeur -1 représente un déplacement vers la gauche (pile).
+
+Ainsi, la loi de la variable aléatoire $X_i$ dans ce cas est la loi de Rademacher.
+
+L'erreur ici serait de penser à une loi de Bernoulli, qui ne comptabilise que les succès (0 et 1, et non pas -1 et 1
+)
+
+Pour déterminer la loi de $X$, qui représente la position du marcheur à l'instant nT, nous devons prendre en compte la somme des déplacements individuels $X_i$ jusqu'à cet instant.
+
+Comme mentionné précédemment, chaque déplacement $X_i$ suit une loi de Rademacher avec des probabilités égales de +s et -s, toutes deux égales à $frac(1,2)$.
+
+La variable $X(n*T, omega)$ peut être exprimée comme la somme des déplacements individuels jusqu'à l'instant nT :
+
+$X(n*T, omega) = X_1 + X_2 + ... + X_n$
+
+La somme de variables aléatoires indépendantes et identiquement distribuées (i.i.d.) suit une autre loi de probabilité. Dans ce cas, la somme des déplacements $X_i$ suit une loi de distribution normale, également appelée distribution gaussienne.
+
+Si on prend $s=T=1$, on peut représenter X pour n=20,100,1000.
+
+#figure(
+  table(
+    columns: 2,
+    [#image("../Images/Partie2/20.png",width: 90%)],
+    [#image("../Images/Partie2/100.png",width: 90%)],
+    [#image("../Images/Partie2/1000.png",width: 90%)]
+  ),
+  caption: [Représentation de X pour n=20,100,1000.],
+)
+
+Le code qui a permis de générer ces représentation de X est disponible en annexe (1).
+
+Pour calculer l'espérance de $X(n*T, omega)$, nous pouvons utiliser la propriété de linéarité de l'espérance.
+
+On va de plus normaliser ${-s;+s}$ à ${-1;+1}$ pour nous simpifier la tâche.
+
+$E[X(n*T, omega)] = E[X_1 + X_2 + ... + X_n]$
+
+Comme les déplacements normalisés $X_i$ suivent une distribution de Rademacher avec une probabilité de +1 et -1 égales à $frac(1,2)$ chacune, l'espérance de chaque déplacement individuel est de 0 :
+
+$E[X_i] = (+1) * frac(1,2) + (-1) * frac(1,2) = 0$
+
+Puisque les déplacements normalisés ont une espérance de 0, la somme des déplacements normalisés jusqu'à l'instant nT donne également une espérance de 0 :
+
+$E[X(n*T, omega)] = E[X_1 + X_2 + ... + X_n]
+
+= E[X_1] + E[X_2] + ... + E[X_n]
+
+= 0 + 0 + ... + 0
+
+= 0$
+
+Ainsi, dans le cas d'une marche aléatoire symétrique avec des déplacements normalisés à +1 et -1, la variable aléatoire $X(n*T, omega)$ a une espérance de 0
+
+Pour calculer la variance de $X$, nous devons tenir compte des déplacements individuels $X_i$.
+
+Comme nous l'avons précédemment établi, chaque déplacement $X_i$ suit une loi de Rademacher definie par :
+
+$P(X_i = +1) = frac(1,2)$
+
+$P(X_i = -1) = frac(1,2)$
+
+La variance de $X(n*T, omega)$ peut être calculée en utilisant la propriété de linéarité de la variance. Comme les déplacements individuels $X_i$ sont indépendants, la variance totale est la somme des variances des déplacements individuels :
+
+$V[X(n*T, omega)] = V[X_1 + X_2 + ... + X_n]$
+
+Comme les déplacements $X_i$ sont i.i.d., nous pouvons simplifier davantage :
+
+$V[X(n*T, omega)] = V[X_1] + V[X_2] + ... + V[X_n]$
+
+Chaque déplacement $X_i$ suit une loi de Rademacher, et la variance de la loi de Rademacher est définie par $E[X_i^2] - (E[X_i])^2$. Dans ce cas, l'espérance des déplacements $X_i$ est de 0 (comme nous l'avons déterminé précédemment).
+
+Ainsi, nous avons :
+
+$V[X_i] = E[X_i^2] - (E[X_i])^2
+= E[X_i^2]
+= (+sigma)^2 * frac(1,2) + (-sigma)^2 * frac(1,2)
+= sigma^2 * frac(1,2) + sigma^2 * frac(1,2)
+= sigma^2$
+
+Puisque chaque déplacement $X_i$ a une variance de $omega^2$, la variance totale de $X(n*T, omega)$ est la somme des variances des déplacements individuels :
+
+$V[X(n*T, omega)] = V[X_1] + V[X_2] + ... + V[X_n]
+= sigma^2 + sigma^2 + ... + sigma^2$ (n termes au total)
+$= n * sigma^2$
+
+Ainsi, la variance de la variable aléatoire $X(n*T, w)$ est $n * sigma^2$ dans le cas d'une marche aléatoire symétrique.
+
 == Partie 2
 
+Ici une représentation de X pour n fixé à 100 et T de plus en plus petit.
+
+#figure(
+  table(
+    columns: 2,
+    [#image("../Images/Partie2/1.png",width: 90%)],
+    [#image("../Images/Partie2/01.png",width: 90%)],
+    [#image("../Images/Partie2/001.png",width: 90%)],
+    [#image("../Images/Partie2/0001.png",width: 90%)]
+  ),
+  caption: [Représentation de X pour n=100 et T=1,0.1,0.01,0.001],
+)
+
+Le code qui a permis de générer ces représentation de X est disponible en annexe (2).
+
+Pour démontrer que $X(t)$ suit une loi normale de moyenne 0 et d'écart-type $sqrt(t)$, nous allons utiliser le théorème central limite.
+
+Dans notre cas, chaque déplacement individuel suit une loi de Rademacher avec une probabilité de +1 ou -1, et chaque déplacement est de longueur s.
+
+La variable aléatoire $X(t)$ est la somme de n déplacements effectués au cours des n intervalles de temps.
+
+Le déplacement total à l'instant t est donné par $X(t) = X_1 + X_2 + ... + X_n$.
+
+L'espérance de chaque déplacement individuel est :
+
+$E(X_i) = 1 * P(X_i = 1) + (-1) * P(X_i = -1) = 1 * frac(1,2) + (-1) * frac(1,2) = 0$.
+
+La variance de chaque déplacement individuel est :
+
+$V(X_i) = E(X_i^2) - (E(X_i))^2 = (1^2 * frac(1,2) + (-1)^2 * frac(1,2)) - 0^2 = frac(1,2) + frac(1,2) = 1$.
+
+La moyenne de $X(t)$ est :
+
+$E(X(t)) = E(X_1 + X_2 + ... + X_n) = E(X_1) + E(X_2) + ... + E(X_n) = 0 + 0 + ... + 0 = 0$.
+
+La variance de $X(t)$ est :
+
+$V(X(t)) = V(X_1 + X_2 + ... + X_n) = V(X_1) + V(X_2) + ... + V(X_n) = 1 + 1 + ... + 1 = n$.
+
+Maintenant, nous devons tenir compte du fait que $n = frac(t,T)$, où T est l'intervalle de temps entre les déplacements et t est le temps total.
+
+Par conséquent, $V(X(t)) = n = frac(t,T)$.
+
+En utilisant la définition de la variance, nous pouvons réécrire :
+
+$V(X(t)) = frac(t,T)$.
+
+Pour obtenir l'écart-type, nous prenons la racine carrée de la variance :
+
+Écart-type$(X(t)) = sqrt(frac(t,T)) = frac(sqrt(t),sqrt(T))$.
+
+Donc, l'écart-type de $X(t)$ est $frac(sqrt(t),sqrt(T))$.
+
+Si nous prenons T = 1, nous obtenons :
+
+Écart-type$(X(t)) = sqrt(t)$.
+
+Ainsi, $X(t)$ suit une loi normale de moyenne 0 et d'écart-type $sqrt(t)$, correspondant au mouvement brownien.
+
+#pagebreak()
+
+= Annexe
+
+(1)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import time
+
+# Paramètres
+s = 1  # Longueur du pas
+T = 1  # Intervalle de temps
+n_values = [20,100,1000]  # Valeurs de n
+
+def marche_aleatoire(n, s):
+    positions = np.zeros(n+1)  # Tableau pour stocker les positions
+    for i in range(1, n+1):
+        deplacement = np.random.choice([-s, s])  # Déplacement aléatoire (-1 pour gauche, 1 pour droite)
+        positions[i] = positions[i-1] + deplacement
+    return positions
+
+# Trajectoires
+for n in n_values:
+    positions = marche_aleatoire(n, s)
+    time.sleep(T)
+    temps = np.arange(0, n+1) * T
+    plt.step(temps, positions, where='post', label=f'n = {n}')
+
+# Paramètres de la figure
+plt.xlabel('Temps')
+plt.ylabel('Position')
+plt.legend()
+plt.grid(True)
+
+# Affichage de la figure
+plt.show()
+
+```
+
+(2)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+def marche_aleatoire(n, T):
+    positions = np.zeros(n+1)  # Tableau pour stocker les positions
+    for i in range(1, n+1):
+        deplacement = np.random.choice([-1, 1])  # Déplacement aléatoire (-1 pour gauche, 1 pour droite)
+        positions[i] = positions[i-1] + deplacement
+    return positions
+
+# Paramètres
+s = 1  # Longueur du pas
+n = 100  # Nombre d'intervalles de temps fixé
+T_values = [1, 0.1, 0.01, 0.001]  # Valeurs de T de plus en plus petites
+
+# Trajectoires
+for T in T_values:
+    positions = marche_aleatoire(n, T)
+    temps = np.arange(0, n+1) * T
+    plt.step(temps, positions, where='post', label=f'T = {T}')
+
+# Paramètres de la figure
+plt.xlabel('Temps')
+plt.ylabel('Position')
+plt.legend()
+plt.grid(True)
+
+# Affichage de la figure
+plt.show()
+```

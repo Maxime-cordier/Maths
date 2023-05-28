@@ -3,7 +3,7 @@ Partie 1 :
 
 //1
 
-Dans le contexte de la marche aléatoire décrite précédemment, où un jet de pièce équilibrée détermine le déplacement à droite (+s) ou à gauche (-s), la variable aléatoire X_i peut être modélisée comme une variable aléatoire suivant la loi de Rademacher.
+Dans le contexte d'une marche aléatoire où un jet de pièce équilibrée détermine le déplacement à droite (+s) ou à gauche (-s), la variable aléatoire X_i peut être modélisée comme une variable aléatoire suivant la loi de Rademacher.
 
 La loi de Rademacher est définie par la distribution de probabilité suivante :
 
@@ -20,9 +20,6 @@ Lorsque nous additionnons un grand nombre de variables aléatoires indépendante
 
 Dans ce cas, chaque X_i suit une loi de Rademacher avec une probabilité de +1 et -1, chacune étant de 0,5. La somme des variables aléatoires X_i donne la position du marcheur à l'instant nT.
 
-Comme n tend vers l'infini, la distribution de X converge vers une distribution normale. La loi de X suit une distribution normale avec une moyenne de 0 et une variance de n.
-
-En résumé, la variable aléatoire X(nT, w), représentant la position du marcheur à l'instant nT, suit une loi normale avec une moyenne de 0 et une variance de n.
 
 //3
 
